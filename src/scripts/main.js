@@ -56,32 +56,117 @@ const scannerData = {
 
 function initPhoneMockup() {
   const phoneTabs = document.querySelectorAll(".phone-tab-btn");
+  const glider = document.getElementById("phone-tabs-glider");
+  const phoneScreenContainer = document.querySelector(".phone-screen-container");
+  const screenKeys = ["scan", "info", "settings"];
   const screens = {
     scan: document.getElementById("screen-scan"),
     info: document.getElementById("screen-info"),
     settings: document.getElementById("screen-settings")
   };
 
-  phoneTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      phoneTabs.forEach(t => {
-        t.classList.remove("active");
-        t.setAttribute("aria-selected", "false");
-      });
-      tab.classList.add("active");
-      tab.setAttribute("aria-selected", "true");
+  let currentIndex = 0;
 
-      const target = tab.dataset.screen;
-      Object.entries(screens).forEach(([key, screenEl]) => {
-        if (screenEl) {
-          if (key === target) {
-            screenEl.classList.add("active");
-          } else {
-            screenEl.classList.remove("active");
+  function updateGlider(activeTab) {
+    if (!glider || !activeTab) return;
+    const parentLeft = activeTab.parentElement.getBoundingClientRect().left;
+    const tabRect = activeTab.getBoundingClientRect();
+    const leftOffset = tabRect.left - parentLeft;
+    glider.style.width = `${tabRect.width}px`;
+    glider.style.transform = `translateX(${leftOffset}px)`;
+  }
+
+  function switchScreen(targetIndex) {
+    if (targetIndex < 0 || targetIndex >= screenKeys.length) return;
+    if (targetIndex === currentIndex && screens[screenKeys[currentIndex]]?.classList.contains("active")) {
+      updateGlider(phoneTabs[targetIndex]);
+      return;
+    }
+
+    const isForward = targetIndex > currentIndex;
+    const oldKey = screenKeys[currentIndex];
+    const newKey = screenKeys[targetIndex];
+    currentIndex = targetIndex;
+
+    // Update tabs and position glider capsule
+    phoneTabs.forEach((t, idx) => {
+      const isActive = idx === currentIndex;
+      t.classList.toggle("active", isActive);
+      t.setAttribute("aria-selected", isActive ? "true" : "false");
+      if (isActive) updateGlider(t);
+    });
+
+    // Animate screens horizontally
+    Object.entries(screens).forEach(([key, screenEl]) => {
+      if (!screenEl) return;
+      if (key === newKey) {
+        screenEl.classList.remove("exit-left", "exit-right");
+        screenEl.style.transition = "none";
+        screenEl.style.transform = isForward ? "translateX(100%)" : "translateX(-100%)";
+        screenEl.style.opacity = "0";
+
+        void screenEl.offsetWidth; // Force reflow
+
+        screenEl.style.transition = "";
+        screenEl.classList.add("active");
+        screenEl.style.transform = "";
+        screenEl.style.opacity = "";
+      } else if (key === oldKey) {
+        screenEl.classList.remove("active");
+        screenEl.classList.remove(isForward ? "exit-right" : "exit-left");
+        screenEl.classList.add(isForward ? "exit-left" : "exit-right");
+      } else {
+        screenEl.classList.remove("active", "exit-left", "exit-right");
+        screenEl.style.transform = isForward ? "translateX(-100%)" : "translateX(100%)";
+      }
+    });
+  }
+
+  phoneTabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      switchScreen(index);
+    });
+  });
+
+  // Swipe gesture support on phone mockup
+  if (phoneScreenContainer) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    phoneScreenContainer.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    phoneScreenContainer.addEventListener("touchend", (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX < 0) {
+          if (currentIndex < screenKeys.length - 1) {
+            switchScreen(currentIndex + 1);
+          }
+        } else {
+          if (currentIndex > 0) {
+            switchScreen(currentIndex - 1);
           }
         }
-      });
-    });
+      }
+    }, { passive: true });
+  }
+
+  // Initial glider positioning
+  const initialActive = document.querySelector(".phone-tab-btn.active");
+  if (initialActive) {
+    setTimeout(() => updateGlider(initialActive), 60);
+  }
+
+  window.addEventListener("resize", () => {
+    const curActive = document.querySelector(".phone-tab-btn.active");
+    if (curActive) updateGlider(curActive);
   });
 }
 
@@ -96,18 +181,27 @@ function initPillarsSlider() {
   const prevBtn = document.getElementById("btn-slide-prev");
   const nextBtn = document.getElementById("btn-slide-next");
   const counterText = document.getElementById("slide-counter-text");
+  const sliderWrapper = document.querySelector(".pillars-slider-wrapper");
 
   let currentSlide = 0;
   const totalSlides = slides.length;
   if (totalSlides === 0) return;
 
-  function showSlide(index) {
+  function showSlide(index, forcedDirection = null) {
     if (index < 0) index = totalSlides - 1;
     if (index >= totalSlides) index = 0;
+
+    const direction = forcedDirection || (index >= currentSlide ? "right" : "left");
     currentSlide = index;
 
     slides.forEach((slide, i) => {
-      slide.classList.toggle("active", i === currentSlide);
+      slide.classList.remove("slide-from-left", "slide-from-right");
+      if (i === currentSlide) {
+        slide.classList.add(direction === "right" ? "slide-from-right" : "slide-from-left");
+        slide.classList.add("active");
+      } else {
+        slide.classList.remove("active");
+      }
     });
 
     tabs.forEach((tab, i) => {
@@ -143,14 +237,38 @@ function initPillarsSlider() {
 
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-      showSlide(currentSlide - 1);
+      showSlide(currentSlide - 1, "left");
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      showSlide(currentSlide + 1);
+      showSlide(currentSlide + 1, "right");
     });
+  }
+
+  // Swipe gesture support on pillars slide deck
+  if (sliderWrapper) {
+    let startX = 0;
+    let startY = 0;
+    sliderWrapper.addEventListener("touchstart", (e) => {
+      startX = e.changedTouches[0].screenX;
+      startY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    sliderWrapper.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].screenX;
+      const endY = e.changedTouches[0].screenY;
+      const diffX = endX - startX;
+      const diffY = endY - startY;
+      if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX < 0) {
+          showSlide(currentSlide + 1, "right");
+        } else {
+          showSlide(currentSlide - 1, "left");
+        }
+      }
+    }, { passive: true });
   }
 }
 
