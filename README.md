@@ -42,6 +42,16 @@ npm run preview
 
 ---
 
+## Despliegue en Vercel
+
+El proyecto está 100% configurado para desplegarse en [Vercel](https://vercel.com) con cero configuración adicional:
+
+1. Importa el repositorio `samd27/EcoScan-Website` en tu panel de Vercel.
+2. Vercel detectará automáticamente el preset **Vite** con `dist/` como directorio de salida.
+3. El archivo [`vercel.json`](./vercel.json) gestiona automáticamente la función Edge en [`api/download.js`](./api/download.js) para transmitir el APK oficial con el nombre de archivo limpio `EcoScan_v18.7.0.apk` y cabeceras de caché global.
+
+---
+
 ## Proyecto Académico
 
 Desarrollado en la **Facultad de Ciencias de la Computación (FCC)**,  
