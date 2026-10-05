@@ -1,0 +1,89 @@
+/* ==========================================================================
+   EcoScan Design Tokens & Theme System
+   Inspired by Android Material You & Backdrop Liquid Glass (Kyant0)
+   ========================================================================== */
+
+:root {
+  /* Brand Palette - Deep Organic Forest & Fresh Mint */
+  --color-forest-950: #0a1f14;
+  --color-forest-900: #102a1c;
+  --color-forest-800: #16422d;
+  --color-forest-700: #1b4d35;
+  --color-forest-600: #256647;
+  
+  --color-emerald-500: #2e7d32;
+  --color-emerald-400: #388e3c;
+  --color-emerald-300: #4caf50;
+  --color-emerald-200: #81c784;
+  --color-emerald-100: #c8e6c9;
+  --color-emerald-50:  #e8f5e9;
+
+  --color-mint-light:  #f4fbf6;
+  --color-mint-surface: #edf7f0;
+  --color-mint-soft:   #e2f3e8;
+
+  /* Typography / Text Colors with Hue Tinting (Impeccable Craft Floor) */
+  --text-primary: #10291b;
+  --text-secondary: #355342;
+  --text-muted: #577864;
+  --text-inverse: #ffffff;
+  --text-inverse-muted: #d4ebd9;
+
+  /* Waste Category Classification Palette (App Authentic SEMARNAT) */
+  --cat-organico: #2e7d32;
+  --cat-organico-bg: rgba(46, 125, 50, 0.12);
+  --cat-inorganico: #546e7a;
+  --cat-inorganico-bg: rgba(84, 110, 122, 0.12);
+  --cat-papel: #e65100;
+  --cat-papel-bg: rgba(230, 81, 0, 0.12);
+  --cat-metal: #0288d1;
+  --cat-metal-bg: rgba(2, 136, 209, 0.12);
+  --cat-vidrio: #00897b;
+  --cat-vidrio-bg: rgba(0, 137, 123, 0.12);
+  --cat-plastico: #1565c0;
+  --cat-plastico-bg: rgba(21, 101, 192, 0.12);
+  --cat-madera: #795548;
+  --cat-madera-bg: rgba(121, 85, 72, 0.12);
+  --cat-textiles: #6a1b9a;
+  --cat-textiles-bg: rgba(106, 27, 154, 0.12);
+
+  /* Glassmorphism & Liquid Glass Tokens */
+  --glass-bg-primary: rgba(255, 255, 255, 0.78);
+  --glass-bg-secondary: rgba(255, 255, 255, 0.62);
+  --glass-bg-card: rgba(255, 255, 255, 0.82);
+  --glass-bg-dark: rgba(16, 42, 28, 0.88);
+  
+  --glass-border-light: rgba(255, 255, 255, 0.65);
+  --glass-border-subtle: rgba(46, 125, 50, 0.12);
+  --glass-border-hover: rgba(46, 125, 50, 0.28);
+  
+  --glass-blur-sm: blur(12px);
+  --glass-blur-md: blur(20px);
+  --glass-blur-lg: blur(32px);
+
+  /* Shadows with neutral soft elevation */
+  --shadow-sm: 0 2px 6px -1px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 6px 16px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.03);
+  --shadow-phone: 0 18px 40px -8px rgba(0, 0, 0, 0.14), 0 6px 16px -3px rgba(0, 0, 0, 0.06);
+
+  /* Radius System (Smooth Material 3 Squircle Feel) */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
+  --radius-full: 9999px;
+
+  /* Typography Scale */
+  --font-family-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Motion Easings (Smooth Exponential Deceleration) */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+}

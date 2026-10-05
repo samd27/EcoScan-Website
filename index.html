@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoScan — Clasificación Inteligente de Residuos con Edge AI sin Internet</title>
+  
+  <meta name="description" content="EcoScan es una aplicación Android nativa que identifica residuos en tiempo real mediante Edge AI ejecutado en el teléfono. 100% offline, privada y adaptada a 7 normas de América Latina.">
+  <meta name="keywords" content="EcoScan, reciclaje, residuos, inteligencia artificial, Edge AI, YOLOv8, Android, APK, SEMARNAT, sustentabilidad, BUAP">
+  <meta name="author" content="Sergio Abraham Muñoz Díaz, Jovany Solís Ortiz, Dra. María de la C. Pérez de Celis Herrero">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EcoScan — Clasificación Inteligente de Residuos, sin Internet">
+  <meta property="og:description" content="Identifica en tiempo real el material de cualquier residuo mediante visión artificial en tu teléfono. Sin enviar imágenes a servidores y adaptada a 7 normas de Latinoamérica.">
+  <meta property="og:image" content="/assets/screenshots/app-scan-textiles.png">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Header / Navigation Bar
+       ======================================================================== -->
+  <header class="site-header">
+    <nav class="nav-bar" aria-label="Navegación principal">
+      <a href="#" class="brand-link" id="brand-logo" aria-label="Ir al inicio de EcoScan">
+        <div class="brand-icon">
+          <img src="/assets/icons/ecoscan-logo.png" alt="EcoScan Logo" class="brand-logo-img">
+        </div>
+        <span class="brand-name">EcoScan</span>
+        <span class="brand-badge">v18.7.0</span>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#como-funciona" class="nav-link" id="nav-link-funciona">Cómo funciona</a></li>
+        <li><a href="#caracteristicas" class="nav-link" id="nav-link-caracteristicas">Características</a></li>
+        <li><a href="#normas-latam" class="nav-link" id="nav-link-normas">7 Normas Latam</a></li>
+        <li><a href="#instalacion" class="nav-link" id="nav-link-instalacion">Guía APK</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://github.com/samd27/EcoScan-Releases/releases/download/v18.7.0/EcoScan_v18.7.0.apk" download="EcoScan_v18.7.0.apk" class="btn-cta-nav trigger-download" id="btn-nav-download">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M5 20h14v-2H5v2zM12 2L6.5 11h3.5v5h4v-5h3.5L12 2z"/>
+          </svg>
+          <span>Descargar APK</span>
+        </a>
+
+        <button class="nav-toggle" id="nav-toggle-btn" aria-label="Abrir menú de navegación" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========================================================================
+       Hero Section
+       ======================================================================== -->
+  <main>
+    <section class="section hero-section" id="hero">
+      <div class="container hero-grid">
+        
+        <div class="hero-content">
+          <div class="hero-pill-status">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>Edge AI Nativo · 100% Offline · v18.7.0</span>
+          </div>
+
+          <h1 class="hero-title">
+            Clasificación inteligente de residuos, sin Internet
+          </h1>
+
+          <p class="hero-subtitle">
+            Apunta la cámara a cualquier residuo y descubre al instante a qué contenedor oficial pertenece. Inferencia de inteligencia artificial ejecutada íntegramente en tu teléfono, con privacidad total y adaptada a las normas oficiales de América Latina.
+          </p>
+
+          <div class="hero-actions">
+            <div class="hero-buttons-row">
+              <a href="https://github.com/samd27/EcoScan-Releases/releases/download/v18.7.0/EcoScan_v18.7.0.apk" download="EcoScan_v18.7.0.apk" class="btn-primary-download trigger-download" id="hero-cta-download">
+                <div class="btn-icon-wrapper">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+                  </svg>
+                </div>
+                <div class="btn-text-content">
+                  <span class="btn-headline">Descargar EcoScan APK</span>
+                  <span class="btn-meta">v18.7.0 · 91.3 MB · Android 8.0+ (17+)</span>
+                </div>
+              </a>
+
+              <a href="#como-funciona" class="btn-secondary-link" id="hero-btn-demo">
+                <span>Cómo funciona</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M7 17l9.2-9.2M17 17V8H8"/>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Focused Core Highlights: No Internet, No Ads, No Accounts, Android 8.0+ -->
+            <div class="hero-highlights-strip">
+              <div class="highlight-item">
+                <svg viewBox="0 0 24 24" class="highlight-icon">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                </svg>
+                <div class="highlight-text">
+                  <span class="highlight-strong">100% Offline</span>
+                  <span class="highlight-muted">Sin internet ni datos</span>
+                </div>
+              </div>
+
+              <div class="highlight-item">
+                <svg viewBox="0 0 24 24" class="highlight-icon">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H8l5-7v4h3l-5 7z"/>
+                </svg>
+                <div class="highlight-text">
+                  <span class="highlight-strong">Sin anuncios</span>
+                  <span class="highlight-muted">Uso limpio y directo</span>
+                </div>
+              </div>
+
+              <div class="highlight-item">
+                <svg viewBox="0 0 24 24" class="highlight-icon">
+                  <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                </svg>
+                <div class="highlight-text">
+                  <span class="highlight-strong">Sin registros</span>
+                  <span class="highlight-muted">No pide cuentas</span>
+                </div>
+              </div>
+
+              <div class="highlight-item">
+                <svg viewBox="0 0 24 24" class="highlight-icon">
+                  <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
+                </svg>
+                <div class="highlight-text">
+                  <span class="highlight-strong">Android 8.0+</span>
+                  <span class="highlight-muted">Para gama baja y media</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Phone Mockup with Real App Views (Scan, Info, Settings) -->
+        <div class="hero-visual">
+          <div class="phone-view-tabs" role="tablist" aria-label="Vistas de la aplicación">
+            <button class="phone-tab-btn active" data-screen="scan" id="tab-scan" role="tab" aria-selected="true">
+              Scan
+            </button>
+            <button class="phone-tab-btn" data-screen="info" id="tab-info" role="tab" aria-selected="false">
+              Centro de Información
+            </button>
+            <button class="phone-tab-btn" data-screen="settings" id="tab-settings" role="tab" aria-selected="false">
+              Ajustes
+            </button>
+          </div>
+
+          <div class="phone-wrapper">
+            <div class="smartphone-frame">
+              <div class="phone-screen-container">
+                
+                <!-- View 1: Real Scan Screenshot -->
+                <div class="screen-screenshot active" id="screen-scan" role="tabpanel">
+                  <img src="/assets/screenshots/app-scan-textiles.png" alt="Captura de EcoScan en acción identificando Textiles con YOLOv8s" class="phone-img-view" width="360" height="780" decoding="async">
+                </div>
+
+                <!-- View 2: Real App Screenshot - Information Center Modal -->
+                <div class="screen-screenshot" id="screen-info" role="tabpanel">
+                  <img src="/assets/screenshots/app-info-center.png" alt="Captura real de la app EcoScan - Centro de Información" class="phone-img-view" width="360" height="780" loading="lazy" decoding="async">
+                </div>
+
+                <!-- View 3: Real App Screenshot - Settings -->
+                <div class="screen-screenshot" id="screen-settings" role="tabpanel">
+                  <img src="/assets/screenshots/app-settings.png" alt="Captura real de la app EcoScan - Pantalla de Ajustes" class="phone-img-view" width="360" height="780" loading="lazy" decoding="async">
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         Section: Cómo funciona (3 Steps)
+         ======================================================================== -->
+    <section class="section" id="como-funciona">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Cómo funciona EcoScan</h2>
+          <p class="section-description">
+            Tres pasos inmediatos para eliminar la incertidumbre frente al contenedor de basura sin gastar datos móviles ni esperar respuestas remotas.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          
+          <div class="step-card">
+            <div class="step-number-badge">1</div>
+            <h3 class="step-title">Apuntar y Encuadrar</h3>
+            <p class="step-text">
+              Abre la aplicación y orienta la cámara hacia el residuo. La interfaz analiza el flujo de video en vivo mediante CameraX de forma continua, sin necesidad de capturar fotos ni pulsar botones.
+            </p>
+            <div class="step-micro-preview">
+              <svg viewBox="0 0 24 24">
+                <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+              </svg>
+              <span>Detección continua sin pulsar obturador</span>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number-badge">2</div>
+            <h3 class="step-title">Inferencia Edge AI</h3>
+            <p class="step-text">
+              El intérprete de TensorFlow Lite ejecuta el modelo YOLOv8 sobre los núcleos de tu procesador (CPU multihilo). El cálculo es 100% local, descartando lecturas dudosas con umbrales calibrados científicamente.
+            </p>
+            <div class="step-micro-preview">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+              </svg>
+              <span>4 hilos de CPU · 0 kb enviados a la red</span>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number-badge">3</div>
+            <h3 class="step-title">Resolución Inmediata</h3>
+            <p class="step-text">
+              Aparece en pantalla una tarjeta que indica la fracción general (orgánico/inorgánico), el contenedor normativo exacto de tu país y un consejo práctico de preparación.
+            </p>
+            <div class="step-micro-preview">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/>
+              </svg>
+              <span>Instrucción accionable y código de color</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         Section: Características Principales (Focused, human, non-AI layout)
+         ======================================================================== -->
+    <section class="section" id="caracteristicas">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Diseñada para resolver una duda concreta</h2>
+          <p class="section-description">
+            Tres pilares fundamentales presentados en formato interactivo para comprender cómo EcoScan transforma la clasificación de residuos.
+          </p>
+        </div>
+
+        <div class="pillars-slider-wrapper">
+          
+          <!-- Slide Navigation Controls -->
+          <div class="slider-top-nav">
+            <div class="slide-tabs" role="tablist" aria-label="Pilares fundamentales de EcoScan">
+              <button class="slide-tab-btn active" data-slide="0" role="tab" aria-selected="true" id="tab-slide-0">
+                <span class="slide-tab-num">01</span>
+                <span>Edge AI Nativo</span>
+              </button>
+              <button class="slide-tab-btn" data-slide="1" role="tab" aria-selected="false" id="tab-slide-1">
+                <span class="slide-tab-num">02</span>
+                <span>Privacidad y Autonomía</span>
+              </button>
+              <button class="slide-tab-btn" data-slide="2" role="tab" aria-selected="false" id="tab-slide-2">
+                <span class="slide-tab-num">03</span>
+                <span>Detección en Tiempo Real</span>
+              </button>
+            </div>
+
+            <div class="slide-arrows">
+              <button class="slide-arrow-btn" id="btn-slide-prev" aria-label="Pilar anterior">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+              </button>
+              <span class="slide-counter-badge" id="slide-counter-text">1 / 3</span>
+              <button class="slide-arrow-btn" id="btn-slide-next" aria-label="Siguiente pilar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M9 18l6-6-6-6"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Slide Stage -->
+          <div class="slide-viewport">
+            
+            <!-- Slide 01: Edge AI -->
+            <div class="pillar-slide active" id="slide-panel-0" role="tabpanel">
+              <div class="slide-grid">
+                <div class="slide-content">
+                  <div class="slide-badge">
+                    <span class="slide-number-chip">Pilar 01</span>
+                    <span class="slide-category-text">Inferencia en el dispositivo</span>
+                  </div>
+                  <h3 class="slide-title">Inteligencia Artificial en el teléfono (Edge AI)</h3>
+                  <p class="slide-description">
+                    El reconocimiento de materiales no viaja a ningún servidor en la nube. Todo el cálculo de detección (YOLOv8 con selección inteligente entre variante nano y small) ocurre dentro del procesador del dispositivo, logrando respuesta inmediata sin consumir datos móviles.
+                  </p>
+                  <ul class="slide-feature-list">
+                    <li>
+                      <div class="slide-check-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                      </div>
+                      <div class="slide-feature-text">
+                        <strong>Cero costo de servidores y cero latencia de red</strong>
+                        <span>Respuesta instantánea incluso en sótanos, zonas rurales o sin cobertura móvil.</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slide-check-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                      </div>
+                      <div class="slide-feature-text">
+                        <strong>Ejecución en 4 hilos de CPU con LiteRT float32</strong>
+                        <span>Optimizado para núcleos multihilo sin agotar la batería del teléfono.</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="slide-visual">
+                  <div class="slide-diagram-card">
+                    <div class="diagram-header">
+                      <span class="diagram-tag">Pipeline Edge AI</span>
+                      <span class="diagram-status">100% On-Device</span>
+                    </div>
+                    <div class="diagram-flow">
+                      <div class="flow-step">
+                        <div class="flow-icon">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--color-emerald-500)"><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+                        </div>
+                        <div class="flow-info">
+                          <span class="flow-title">CameraX Stream</span>
+                          <span class="flow-sub">Captura continua sin obturador</span>
+                        </div>
+                      </div>
+                      <div class="flow-connector">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+                      </div>
+                      <div class="flow-step highlight">
+                        <div class="flow-icon">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--color-emerald-500)"><path d="M6 2v2H4c-.55 0-1 .45-1 1v2H1v2h2v2H1v2h2v2H1v2h2v2c0 .55.45 1 1 1h2v2h2v-2h2v2h2v-2h2v2h2v-2h2c.55 0 1-.45 1-1v-2h2v-2h-2v-2h2v-2h-2V9h2V7h-2V5c0-.55-.45-1-1-1h-2V2h-2v2h-2V2h-2v2H8V2H6zm2 4h8v8H8V6z"/></svg>
+                        </div>
+                        <div class="flow-info">
+                          <span class="flow-title">LiteRT / TensorFlow Lite</span>
+                          <span class="flow-sub">YOLOv8 en 4 hilos locales</span>
+                        </div>
+                      </div>
+                      <div class="flow-connector">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+                      </div>
+                      <div class="flow-step success">
+                        <div class="flow-icon">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--color-forest-800)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <div class="flow-info">
+                          <span class="flow-title">Clasificación Inmediata</span>
+                          <span class="flow-sub">0 bytes transmitidos a la red</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 02: Privacidad -->
+            <div class="pillar-slide" id="slide-panel-1" role="tabpanel">
+              <div class="slide-grid">
+                <div class="slide-content">
+                  <div class="slide-badge">
+                    <span class="slide-number-chip">Pilar 02</span>
+                    <span class="slide-category-text">Soberanía de datos</span>
+                  </div>
+                  <h3 class="slide-title">Privacidad absoluta y autonomía</h3>
+                  <p class="slide-description">
+                    Ninguna fotografía sale de tu casa o lugar de trabajo. No necesitas crear un usuario, vincular correos electrónicos ni conceder permisos innecesarios de almacenamiento o ubicación: solo el acceso a la cámara durante el uso activo.
+                  </p>
+                  <ul class="slide-feature-list">
+                    <li>
+                      <div class="slide-check-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                      </div>
+                      <div class="slide-feature-text">
+                        <strong>Sin cuentas, sin anuncios y sin rastreadores comerciales</strong>
+                        <span>Tu actividad diaria de reciclaje jamás será perfilada ni comercializada.</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slide-check-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                      </div>
+                      <div class="slide-feature-text">
+                        <strong>Transparencia y soberanía sobre tus propios datos</strong>
+                        <span>Todo el cómputo se aísla en el sandbox del sistema operativo Android.</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="slide-visual">
+                  <div class="slide-diagram-card">
+                    <div class="diagram-header">
+                      <span class="diagram-tag">Seguridad y Permisos</span>
+                      <span class="diagram-status">Aislamiento Sandbox</span>
+                    </div>
+                    <div class="privacy-checklist">
+                      <div class="privacy-item checked">
+                        <span class="p-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+                        <span>Permiso CÁMARA (solo en uso activo)</span>
+                      </div>
+                      <div class="privacy-item blocked">
+                        <span class="p-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></span>
+                        <span>Permiso Almacenamiento (No requerido)</span>
+                      </div>
+                      <div class="privacy-item blocked">
+                        <span class="p-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></span>
+                        <span>Permiso Ubicación / GPS (No requerido)</span>
+                      </div>
+                      <div class="privacy-item blocked">
+                        <span class="p-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></span>
+                        <span>Acceso a Contactos / Cuentas (No requerido)</span>
+                      </div>
+                      <div class="privacy-item blocked">
+                        <span class="p-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></span>
+                        <span>Telemetría externa / Rastreadores (0%)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 03: Detección en Tiempo Real -->
+            <div class="pillar-slide" id="slide-panel-2" role="tabpanel">
+              <div class="slide-grid">
+                <div class="slide-content">
+                  <div class="slide-badge">
+                    <span class="slide-number-chip">Pilar 03</span>
+                    <span class="slide-category-text">Flujo en vivo a 30 FPS</span>
+                  </div>
+                  <h3 class="slide-title">Detección continua en tiempo real, sin obturador</h3>
+                  <p class="slide-description">
+                    EcoScan elimina la fricción de tomar fotos y esperar pantallas de carga. Apuntas la cámara y el visor analiza el flujo de video en vivo de manera ininterrumpida, estabilizando la lectura en pantalla en menos de 150 milisegundos.
+                  </p>
+                  <ul class="slide-feature-list">
+                    <li>
+                      <div class="slide-check-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                      </div>
+                      <div class="slide-feature-text">
+                        <strong>Flujo continuo CameraX a 30 FPS</strong>
+                        <span>Clasificación instantánea en cuanto el material entra en el encuadre óptico.</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slide-check-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                      </div>
+                      <div class="slide-feature-text">
+                        <strong>Supresión de falsos positivos (NMS y Umbrales Calibrados)</strong>
+                        <span>Descarte automático de reflejos y objetos dudosos con umbrales calibrados científicamente.</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="slide-visual">
+                  <div class="slide-diagram-card">
+                    <div class="diagram-header">
+                      <span class="diagram-tag">Rendimiento en Vivo</span>
+                      <span class="diagram-status">&lt; 150ms / 30 FPS</span>
+                    </div>
+                    <div class="metrics-visual-flow">
+                      <div class="perf-metric-row">
+                        <div class="perf-metric-icon">
+                          <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--color-emerald-500)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+                        </div>
+                        <div class="perf-metric-text">
+                          <span class="perf-metric-title">Latencia de Inferencia</span>
+                          <span class="perf-metric-val">~85 ms en CPU móvil</span>
+                        </div>
+                      </div>
+                      <div class="perf-metric-row">
+                        <div class="perf-metric-icon">
+                          <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--color-emerald-500)"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+                        </div>
+                        <div class="perf-metric-text">
+                          <span class="perf-metric-title">Frecuencia de Muestreo</span>
+                          <span class="perf-metric-val">30 cuadros por segundo</span>
+                        </div>
+                      </div>
+                      <div class="perf-metric-row">
+                        <div class="perf-metric-icon">
+                          <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--color-emerald-500)"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                        </div>
+                        <div class="perf-metric-text">
+                          <span class="perf-metric-title">Filtro de Ruido Óptico</span>
+                          <span class="perf-metric-val">Non-Maximum Suppression (NMS)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Slide Dots -->
+          <div class="slide-dots-container" role="tablist" aria-label="Navegación de pilares por puntos">
+            <button class="slide-dot active" data-slide="0" aria-label="Ir a pilar 1" role="tab" aria-selected="true" aria-controls="slide-panel-0"></button>
+            <button class="slide-dot" data-slide="1" aria-label="Ir a pilar 2" role="tab" aria-selected="false" aria-controls="slide-panel-1"></button>
+            <button class="slide-dot" data-slide="2" aria-label="Ir a pilar 3" role="tab" aria-selected="false" aria-controls="slide-panel-2"></button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         Section: Adaptación a 7 Normas de América Latina
+         ======================================================================== -->
+    <section class="section" id="normas-latam">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Adaptación a 7 Normas de América Latina</h2>
+          <p class="section-description">
+            El mismo modelo de IA identifica el material físico, mientras que una capa arquitectónica desacoplada traduce el resultado al código de color y contenedor oficial de cada país sin reentrenar la red.
+          </p>
+        </div>
+
+        <div class="norms-container">
+          <div class="country-selector-pills" role="tablist" aria-label="Selecciona un país para ver su norma">
+            <button class="country-btn active" data-country="argentina" id="btn-country-argentina" role="tab" aria-selected="true" aria-controls="norms-tabpanel">
+              <span class="country-code-badge">AR</span>
+              <span>Argentina</span>
+            </button>
+            <button class="country-btn" data-country="brasil" id="btn-country-brasil" role="tab" aria-selected="false" aria-controls="norms-tabpanel">
+              <span class="country-code-badge">BR</span>
+              <span>Brasil</span>
+            </button>
+            <button class="country-btn" data-country="chile" id="btn-country-chile" role="tab" aria-selected="false" aria-controls="norms-tabpanel">
+              <span class="country-code-badge">CL</span>
+              <span>Chile</span>
+            </button>
+            <button class="country-btn" data-country="colombia" id="btn-country-colombia" role="tab" aria-selected="false" aria-controls="norms-tabpanel">
+              <span class="country-code-badge">CO</span>
+              <span>Colombia</span>
+            </button>
+            <button class="country-btn" data-country="mexico" id="btn-country-mexico" role="tab" aria-selected="false" aria-controls="norms-tabpanel">
+              <span class="country-code-badge">MX</span>
+              <span>México</span>
+            </button>
+            <button class="country-btn" data-country="peru" id="btn-country-peru" role="tab" aria-selected="false" aria-controls="norms-tabpanel">
+              <span class="country-code-badge">PE</span>
+              <span>Perú</span>
+            </button>
+            <button class="country-btn" data-country="uruguay" id="btn-country-uruguay" role="tab" aria-selected="false" aria-controls="norms-tabpanel">
+              <span class="country-code-badge">UY</span>
+              <span>Uruguay</span>
+            </button>
+          </div>
+
+          <div class="norms-display-card" id="norms-tabpanel" role="tabpanel" aria-labelledby="btn-country-argentina">
+            <div class="norms-card-header">
+              <div class="norms-country-info">
+                <h3 id="norms-country-title">
+                  <span class="country-code-badge title-badge">AR</span> Argentina
+                </h3>
+                <span class="norms-law-reference" id="norms-law-reference">Decreto 779/2022 (Anexo II) - Ley 25.916</span>
+              </div>
+              <span class="norms-badge-status" id="norms-status-badge">Recomendatoria Nacional</span>
+            </div>
+
+            <div class="bins-visual-grid" id="bins-visual-grid">
+              <!-- Dynamically populated by main.js -->
+            </div>
+
+            <div class="norms-insight-box" id="norms-insight-box">
+              <p id="norms-insight-text">
+                En Argentina, el color verde representa los reciclables secos y el amarillo los plásticos. EcoScan traduce el material detectado al código cromático argentino sin reentrenar.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         Section: Guía de Instalación Rápida
+         ======================================================================== -->
+    <section class="section" id="instalacion">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Instalación directa del archivo APK</h2>
+          <p class="section-description">
+            EcoScan se distribuye como paquete APK directo para brindarte libre acceso inmediato, sin comisiones de intermediarios ni esperas de publicación.
+          </p>
+        </div>
+
+        <div class="trust-grid">
+          
+          <!-- Sideloading Accordion -->
+          <div class="accordion-wrapper">
+            
+            <div class="accordion-item active">
+              <button class="accordion-header" aria-expanded="true">
+                <div class="accordion-header-left">
+                  <span class="step-circle-badge">1</span>
+                  <span class="accordion-title">Descarga el archivo APK</span>
+                </div>
+                <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-inner">
+                  <div class="accordion-body">
+                    Toca el botón "Descargar APK" en esta página. Se descargará el archivo oficial <code>EcoScan_v18.7.0.apk</code> (91.3 MB).
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="false">
+                <div class="accordion-header-left">
+                  <span class="step-circle-badge">2</span>
+                  <span class="accordion-title">Habilita la instalación en Android</span>
+                </div>
+                <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-inner">
+                  <div class="accordion-body">
+                    Si tu teléfono muestra un aviso de seguridad al descargar, pulsa en <em>Ajustes</em> y activa <strong>"Permitir desde esta fuente"</strong> (el aviso estándar del sistema para archivos fuera de Play Store).
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="false">
+                <div class="accordion-header-left">
+                  <span class="step-circle-badge">3</span>
+                  <span class="accordion-title">Instala la aplicación</span>
+                </div>
+                <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-inner">
+                  <div class="accordion-body">
+                    Abre la notificación de descarga o busca el archivo en tu carpeta de <em>Descargas</em> y toca <strong>"Instalar"</strong>.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="false">
+                <div class="accordion-header-left">
+                  <span class="step-circle-badge">4</span>
+                  <span class="accordion-title">¡Listo! Comienza a escanear</span>
+                </div>
+                <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-inner">
+                  <div class="accordion-body">
+                    Abre EcoScan y concede el permiso de <code>CÁMARA</code> al iniciar para el análisis en tiempo real. No requiere conexión ni registros.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Direct Distribution Information Card -->
+          <div class="direct-apk-card">
+            <div class="direct-card-badge">Información 100% Integrada</div>
+            <h3 class="direct-card-title">Toda la información necesaria está dentro de la app</h3>
+            <p class="direct-card-text">
+              EcoScan no depende de manuales externos ni consultas en internet. Todo el conocimiento sobre separación de residuos, normativas por país, consejos de preparación y centros de reciclaje está integrado y disponible 100% offline en tu bolsillo.
+            </p>
+
+            <div class="direct-card-features">
+              <div class="direct-feature-row">
+                <div class="direct-feature-icon">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                </div>
+                <div>
+                  <h4 class="direct-feature-name">Centro de Información Offline</h4>
+                  <p class="direct-feature-desc">Fichas técnicas de cada material (plásticos PET/HDPE, vidrio, cartón, orgánicos, metales) con instrucciones de limpieza y preparación.</p>
+                </div>
+              </div>
+
+              <div class="direct-feature-row">
+                <div class="direct-feature-icon">
+                  <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54A.484.484 0 0 0 13.9 2h-3.8c-.24 0-.45.17-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.47c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.8c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                </div>
+                <div>
+                  <h4 class="direct-feature-name">Ajustes y Normativas al Instante</h4>
+                  <p class="direct-feature-desc">Cambia el país activo con un toque y consulta los códigos oficiales de contenedores sin salir de la aplicación ni requerir internet.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="direct-card-action">
+              <a href="https://github.com/samd27/EcoScan-Releases/releases/download/v18.7.0/EcoScan_v18.7.0.apk" download="EcoScan_v18.7.0.apk" class="btn-primary-download trigger-download" style="width: 100%; justify-content: center;">
+                <span>Descargar EcoScan v18.7.0 (91.3 MB)</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         Direct Download Banner Section
+         ======================================================================== -->
+    <section class="section" style="padding-top: 1rem;">
+      <div class="container">
+        <div class="download-banner">
+          <div class="banner-content">
+            <h2 class="banner-title">Comienza a separar correctamente hoy mismo</h2>
+            <p class="banner-subtitle">
+              Descarga EcoScan en tu teléfono Android y transforma la duda en una decisión consciente e informada en menos de dos segundos.
+            </p>
+            <div class="banner-chips">
+              <span class="banner-chip-item">Versión 18.7.0</span>
+              <span class="banner-chip-item">Tamaño: 91.3 MB</span>
+              <span class="banner-chip-item">Android 8.0+ (17+)</span>
+              <span class="banner-chip-item">100% Gratis</span>
+            </div>
+          </div>
+
+          <div class="banner-action">
+            <a href="https://github.com/samd27/EcoScan-Releases/releases/download/v18.7.0/EcoScan_v18.7.0.apk" download="EcoScan_v18.7.0.apk" class="btn-primary-download trigger-download" id="banner-btn-download">
+              <div class="btn-icon-wrapper">
+                <svg viewBox="0 0 24 24">
+                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+                </svg>
+              </div>
+              <div class="btn-text-content">
+                <span class="btn-headline">Descargar EcoScan</span>
+                <span class="btn-meta">Archivo .apk verificado (v18.7.0)</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       Footer
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <a href="#" class="brand-link">
+            <div class="brand-icon">
+              <img src="/assets/icons/ecoscan-logo.png" alt="EcoScan Logo" class="brand-logo-img">
+            </div>
+            <span class="brand-name">EcoScan</span>
+          </a>
+          <p>
+            "La posibilidad de mejorar el mundo al alcance de tu mano".
+            Clasificación inteligente de residuos con visión artificial y Edge AI para América Latina.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading">Navegación</h3>
+          <ul class="footer-links">
+            <li><a href="#hero" class="footer-link">Inicio</a></li>
+            <li><a href="#como-funciona" class="footer-link">Cómo funciona</a></li>
+            <li><a href="#caracteristicas" class="footer-link">Características</a></li>
+            <li><a href="#normas-latam" class="footer-link">Normas de clasificación</a></li>
+            <li><a href="#instalacion" class="footer-link">Guía de instalación</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading">Ficha Técnica</h3>
+          <div class="footer-specs">
+            <p>Paquete: <code>com.teamecoscan.ecoscanrebirth</code></p>
+            <p>Versión: <code>v18.7.0</code></p>
+            <p>Motor: <code>TensorFlow Lite (LiteRT float32)</code></p>
+            <p>Modelo: <code>YOLOv8 (variantes n y s)</code></p>
+            <p>Compatibilidad: <code>Android 8.0+ (17+)</code></p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          Desarrollado por <strong>Jovany Solís Ortiz</strong> y <strong>Sergio Abraham Muñoz Díaz</strong>. Asesora: <strong>Dra. María de la C. Pérez de Celis Herrero</strong>.<br>
+          Facultad de Ciencias de la Computación, <strong>Benemérita Universidad Autónoma de Puebla (BUAP)</strong>.
+        </p>
+        <p>
+          Software Libre &copy; 2026 EcoScan Project.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast for Download Feedback -->
+  <div class="download-toast" id="download-toast" role="alert" aria-live="assertive">
+    <div class="toast-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M5 20h14v-2H5v2zM12 2L6.5 11h3.5v5h4v-5h3.5L12 2z"/>
+      </svg>
+    </div>
+    <div class="toast-text">
+      <span class="toast-title">Descarga iniciada</span>
+      <span class="toast-desc">EcoScan_v18.7.0.apk (91.3 MB). Sigue la guía de instalación si es necesario.</span>
+    </div>
+  </div>
+
+  <script type="module" src="/src/scripts/main.js"></script>
+</body>
+</html>

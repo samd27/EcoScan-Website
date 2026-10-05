@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Production build artifacts
+dist/
+
+# Local IDE and agent configurations
+.gemini/
+.claude/
+.impeccable/
+.agents/
+.agent/
+
+# System and OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
