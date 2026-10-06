@@ -6,7 +6,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   initDynamicReleaseInfo();
   initPhoneMockup();
-  initPillarsSlider();
   initRegionalNorms();
   initAccordion();
   initCopyHash();
@@ -171,107 +170,7 @@ function initPhoneMockup() {
   });
 }
 
-/* ==========================================================================
-   1.1. Interactive Pillars Slider / Keynote Presentation
-   ========================================================================== */
 
-function initPillarsSlider() {
-  const tabs = document.querySelectorAll(".slide-tab-btn");
-  const dots = document.querySelectorAll(".slide-dot");
-  const slides = document.querySelectorAll(".pillar-slide");
-  const prevBtn = document.getElementById("btn-slide-prev");
-  const nextBtn = document.getElementById("btn-slide-next");
-  const counterText = document.getElementById("slide-counter-text");
-  const sliderWrapper = document.querySelector(".pillars-slider-wrapper");
-
-  let currentSlide = 0;
-  const totalSlides = slides.length;
-  if (totalSlides === 0) return;
-
-  function showSlide(index, forcedDirection = null) {
-    if (index < 0) index = totalSlides - 1;
-    if (index >= totalSlides) index = 0;
-
-    const direction = forcedDirection || (index >= currentSlide ? "right" : "left");
-    currentSlide = index;
-
-    slides.forEach((slide, i) => {
-      slide.classList.remove("slide-from-left", "slide-from-right");
-      if (i === currentSlide) {
-        slide.classList.add(direction === "right" ? "slide-from-right" : "slide-from-left");
-        slide.classList.add("active");
-      } else {
-        slide.classList.remove("active");
-      }
-    });
-
-    tabs.forEach((tab, i) => {
-      const isActive = i === currentSlide;
-      tab.classList.toggle("active", isActive);
-      tab.setAttribute("aria-selected", isActive ? "true" : "false");
-    });
-
-    dots.forEach((dot, i) => {
-      const isActive = i === currentSlide;
-      dot.classList.toggle("active", isActive);
-      dot.setAttribute("aria-selected", isActive ? "true" : "false");
-    });
-
-    if (counterText) {
-      counterText.textContent = `${currentSlide + 1} / ${totalSlides}`;
-    }
-  }
-
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      const idx = parseInt(tab.dataset.slide, 10);
-      showSlide(idx);
-    });
-  });
-
-  dots.forEach(dot => {
-    dot.addEventListener("click", () => {
-      const idx = parseInt(dot.dataset.slide, 10);
-      showSlide(idx);
-    });
-  });
-
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      showSlide(currentSlide - 1, "left");
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      showSlide(currentSlide + 1, "right");
-    });
-  }
-
-  // Swipe gesture support on pillars slide deck
-  if (sliderWrapper) {
-    let startX = 0;
-    let startY = 0;
-    sliderWrapper.addEventListener("touchstart", (e) => {
-      startX = e.changedTouches[0].screenX;
-      startY = e.changedTouches[0].screenY;
-    }, { passive: true });
-
-    sliderWrapper.addEventListener("touchend", (e) => {
-      const endX = e.changedTouches[0].screenX;
-      const endY = e.changedTouches[0].screenY;
-      const diffX = endX - startX;
-      const diffY = endY - startY;
-      if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
-        if (diffX < 0) {
-          showSlide(currentSlide + 1, "right");
-        } else {
-          showSlide(currentSlide - 1, "left");
-        }
-      }
-    }, { passive: true });
-  }
-}
 
 /* ==========================================================================
    2. Regional Norms Latin America Showcase
@@ -481,12 +380,21 @@ function initCopyHash() {
   copyBtn.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(hashCode.textContent.trim());
-      const originalText = copyBtn.textContent;
-      copyBtn.textContent = "¡Copiado!";
-      copyBtn.style.background = "#81c784";
+      const label = copyBtn.querySelector(".btn-copy-text");
+      const originalText = label ? label.textContent : copyBtn.textContent;
+      if (label) {
+        label.textContent = "¡Copiado!";
+      } else {
+        copyBtn.textContent = "¡Copiado!";
+      }
+      copyBtn.classList.add("copied");
       setTimeout(() => {
-        copyBtn.textContent = originalText;
-        copyBtn.style.background = "";
+        if (label) {
+          label.textContent = originalText;
+        } else {
+          copyBtn.textContent = originalText;
+        }
+        copyBtn.classList.remove("copied");
       }, 2000);
     } catch (err) {
       console.warn("Clipboard access failed:", err);
@@ -590,7 +498,7 @@ async function initDynamicReleaseInfo() {
         });
         if (ghRes.ok) {
           const ghJson = await ghRes.json();
-          const tag = ghJson.tag_name || "v18.8.0";
+          const tag = ghJson.tag_name || "v18.9.0";
           const apkAsset = Array.isArray(ghJson.assets)
             ? ghJson.assets.find(a => a.name && a.name.endsWith(".apk")) || ghJson.assets[0]
             : null;
@@ -600,7 +508,8 @@ async function initDynamicReleaseInfo() {
             versionNumber: tag.replace(/^v/, ""),
             filename: apkAsset ? apkAsset.name : `EcoScan_${tag}.apk`,
             downloadUrl: apkAsset ? apkAsset.browser_download_url : `/downloads/EcoScan_${tag}.apk`,
-            size: apkAsset && apkAsset.size ? (apkAsset.size / (1024 * 1024)).toFixed(1) + " MB" : "91.3 MB"
+            size: apkAsset && apkAsset.size ? (apkAsset.size / (1024 * 1024)).toFixed(1) + " MB" : "91.4 MB",
+            digest: apkAsset && apkAsset.digest ? apkAsset.digest.replace(/^sha256:/i, "") : null
           };
         }
       } catch (err) {
@@ -610,21 +519,29 @@ async function initDynamicReleaseInfo() {
 
     if (!releaseData) return;
 
-    // 3. Update all elements displaying version tag (e.g. 'v18.8.0')
+    // 3. Update all elements displaying version tag (e.g. 'v18.9.0')
     document.querySelectorAll("[data-release-version]").forEach(el => {
       el.textContent = releaseData.version;
     });
 
-    // 4. Update elements displaying version number without 'v' (e.g. '18.8.0')
+    // 4. Update elements displaying version number without 'v' (e.g. '18.9.0')
     document.querySelectorAll("[data-release-version-number]").forEach(el => {
       el.textContent = releaseData.versionNumber;
     });
 
-    // 5. Update elements displaying size (e.g. '91.3 MB')
+    // 5. Update elements displaying size (e.g. '91.4 MB')
     if (releaseData.size) {
       document.querySelectorAll("[data-release-size]").forEach(el => {
         el.textContent = releaseData.size;
       });
+    }
+
+    // 5.1 Update hash code if dynamically discovered
+    if (releaseData.digest) {
+      const hashEl = document.getElementById("hash-code-text");
+      if (hashEl) {
+        hashEl.textContent = releaseData.digest;
+      }
     }
 
     // 6. Update download buttons with clean filename attribute and direct handler

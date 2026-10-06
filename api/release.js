@@ -5,11 +5,11 @@ export const config = {
 
 const GITHUB_REPO = 'samd27/EcoScan-Releases';
 const FALLBACK_RELEASE = {
-  version: 'v18.8.0',
-  versionNumber: '18.8.0',
-  filename: 'EcoScan_v18.8.0.apk',
-  size: '91.3 MB',
-  downloadUrl: 'https://github.com/samd27/EcoScan-Releases/releases/download/v18.8.0/EcoScan_v18.8.0.apk',
+  version: 'v18.9.0',
+  versionNumber: '18.9.0',
+  filename: 'EcoScan_v18.9.0.apk',
+  size: '91.4 MB',
+  downloadUrl: 'https://github.com/samd27/EcoScan-Releases/releases/download/v18.9.0/EcoScan_v18.9.0.apk',
 };
 
 export default async function handler(request) {
@@ -32,7 +32,7 @@ export default async function handler(request) {
     }
 
     const data = await res.json();
-    const tag = data.tag_name || 'v18.8.0';
+    const tag = data.tag_name || 'v18.9.0';
     const cleanTag = tag.replace(/^v/, '');
 
     // Locate the .apk asset
@@ -44,7 +44,7 @@ export default async function handler(request) {
     const downloadUrl = apkAsset ? apkAsset.browser_download_url : `https://github.com/${GITHUB_REPO}/releases/download/${tag}/${filename}`;
     const sizeMb = apkAsset && apkAsset.size
       ? (apkAsset.size / (1024 * 1024)).toFixed(1) + ' MB'
-      : '91.3 MB';
+      : '91.4 MB';
 
     const payload = {
       version: tag.startsWith('v') ? tag : `v${tag}`,

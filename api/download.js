@@ -4,8 +4,8 @@ export const config = {
 };
 
 const GITHUB_REPO = 'samd27/EcoScan-Releases';
-const FALLBACK_APK_URL = 'https://github.com/samd27/EcoScan-Releases/releases/download/v18.8.0/EcoScan_v18.8.0.apk';
-const FALLBACK_FILENAME = 'EcoScan_v18.8.0.apk';
+const FALLBACK_APK_URL = 'https://github.com/samd27/EcoScan-Releases/releases/download/v18.9.0/EcoScan_v18.9.0.apk';
+const FALLBACK_FILENAME = 'EcoScan_v18.9.0.apk';
 
 export default async function handler(request) {
   let downloadUrl = FALLBACK_APK_URL;
