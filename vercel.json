@@ -6,7 +6,7 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/downloads/EcoScan_v18.7.0.apk",
+      "source": "/downloads/(.*)",
       "destination": "/api/download"
     },
     {

@@ -4,6 +4,7 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  initDynamicReleaseInfo();
   initPhoneMockup();
   initPillarsSlider();
   initRegionalNorms();
@@ -562,3 +563,80 @@ function initSmoothScroll() {
     });
   });
 }
+
+/* ==========================================================================
+   8. Dynamic Latest Release Auto-Sync (GitHub Releases)
+   ========================================================================== */
+
+async function initDynamicReleaseInfo() {
+  try {
+    let releaseData = null;
+
+    // 1. Try our edge-cached API route first
+    try {
+      const res = await fetch("/api/release");
+      if (res.ok) {
+        releaseData = await res.json();
+      }
+    } catch (e) {
+      // ignore, proceed to fallback
+    }
+
+    // 2. Direct GitHub API fallback if edge route is unavailable
+    if (!releaseData || !releaseData.version) {
+      try {
+        const ghRes = await fetch("https://api.github.com/repos/samd27/EcoScan-Releases/releases/latest", {
+          headers: { "Accept": "application/vnd.github.v3+json" }
+        });
+        if (ghRes.ok) {
+          const ghJson = await ghRes.json();
+          const tag = ghJson.tag_name || "v18.8.0";
+          const apkAsset = Array.isArray(ghJson.assets)
+            ? ghJson.assets.find(a => a.name && a.name.endsWith(".apk")) || ghJson.assets[0]
+            : null;
+
+          releaseData = {
+            version: tag.startsWith("v") ? tag : `v${tag}`,
+            versionNumber: tag.replace(/^v/, ""),
+            filename: apkAsset ? apkAsset.name : `EcoScan_${tag}.apk`,
+            downloadUrl: apkAsset ? apkAsset.browser_download_url : `/downloads/EcoScan_${tag}.apk`,
+            size: apkAsset && apkAsset.size ? (apkAsset.size / (1024 * 1024)).toFixed(1) + " MB" : "91.3 MB"
+          };
+        }
+      } catch (err) {
+        // network error
+      }
+    }
+
+    if (!releaseData) return;
+
+    // 3. Update all elements displaying version tag (e.g. 'v18.8.0')
+    document.querySelectorAll("[data-release-version]").forEach(el => {
+      el.textContent = releaseData.version;
+    });
+
+    // 4. Update elements displaying version number without 'v' (e.g. '18.8.0')
+    document.querySelectorAll("[data-release-version-number]").forEach(el => {
+      el.textContent = releaseData.versionNumber;
+    });
+
+    // 5. Update elements displaying size (e.g. '91.3 MB')
+    if (releaseData.size) {
+      document.querySelectorAll("[data-release-size]").forEach(el => {
+        el.textContent = releaseData.size;
+      });
+    }
+
+    // 6. Update download buttons with clean filename attribute and direct handler
+    const downloadBtns = document.querySelectorAll(".trigger-download");
+    downloadBtns.forEach(btn => {
+      if (releaseData.filename) {
+        btn.setAttribute("download", releaseData.filename);
+      }
+      btn.setAttribute("href", "/api/download");
+    });
+  } catch (err) {
+    console.warn("Could not sync latest release info:", err);
+  }
+}
+
