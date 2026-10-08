@@ -22,6 +22,12 @@
   --color-mint-surface: #edf7f0;
   --color-mint-soft:   #e2f3e8;
 
+  /* Mesh Gradient Tokens (App-Authentic Material You Organic Glow) */
+  --mesh-bg: #F7FBF2;
+  --mesh-blob-1: rgba(76, 175, 80, 0.48);   /* Orbe 1: Verde Eco Primario (#4CAF50) */
+  --mesh-blob-2: rgba(57, 101, 107, 0.40);  /* Orbe 2: Cyan / Verde azulado (#39656B) */
+  --mesh-blob-3: rgba(82, 99, 80, 0.44);   /* Orbe 3: Verde bosque suave (#526350) */
+
   /* Typography / Text Colors with Hue Tinting (Impeccable Craft Floor) */
   --text-primary: #10291b;
   --text-secondary: #355342;
@@ -87,3 +93,14 @@
   --duration-normal: 250ms;
   --duration-slow: 400ms;
 }
+
+/* Optional Dark Mode Adaptive Palette */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --mesh-bg: #10140F;
+    --mesh-blob-1: rgba(76, 175, 80, 0.35);
+    --mesh-blob-2: rgba(160, 207, 213, 0.40);
+    --mesh-blob-3: rgba(185, 204, 181, 0.38);
+  }
+}
+

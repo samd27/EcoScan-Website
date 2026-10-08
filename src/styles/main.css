@@ -27,22 +27,169 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Atmospheric Ambient Background */
-body::before {
-  content: "";
+/* ==========================================================================
+   Atmospheric Animated Background (Organic Mesh Gradient)
+   3 Diffuse Radial Light Orbs + Dual Simultaneous Periodic Harmonic Motion
+   Authentic to the Android EcoScan Mobile App Experience
+   ========================================================================== */
+
+.mesh-background {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+  background-color: var(--mesh-bg, #F7FBF2);
   z-index: -2;
-  background: 
-    radial-gradient(circle at 18% 12%, rgba(129, 199, 132, 0.22) 0%, transparent 40%),
-    radial-gradient(circle at 82% 28%, rgba(200, 230, 201, 0.35) 0%, transparent 45%),
-    radial-gradient(circle at 50% 75%, rgba(165, 214, 167, 0.18) 0%, transparent 55%),
-    linear-gradient(180deg, #f7fdf9 0%, #edf7f0 50%, #f4fbf6 100%);
   pointer-events: none;
+  contain: strict;
 }
+
+.mesh-rotator {
+  position: absolute;
+  top: calc(50% - 75vmax);
+  left: calc(50% - 75vmax);
+  width: 150vmax;
+  height: 150vmax;
+  transform-origin: center center;
+  animation: rotateMesh 20s linear infinite;
+  will-change: transform;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+  pointer-events: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Orbe 1 — Verde Eco (Primario): #4CAF50, Arriba a la izquierda */
+.blob-1 {
+  width: 82vmax;
+  height: 82vmax;
+  top: 15%;
+  left: 15%;
+  background: radial-gradient(circle, var(--mesh-blob-1) 0%, rgba(76, 175, 80, 0.18) 42%, transparent 70%);
+  animation: shiftBlob1 12s ease-in-out infinite alternate;
+}
+
+/* Orbe 2 — Cyan / Verde azulado (Terciario): #39656B / #A0CFD5, Zona media derecha */
+.blob-2 {
+  width: 74vmax;
+  height: 74vmax;
+  top: 36%;
+  left: 48%;
+  background: radial-gradient(circle, var(--mesh-blob-2) 0%, rgba(57, 101, 107, 0.16) 44%, transparent 70%);
+  animation: shiftBlob2 12s ease-in-out infinite alternate;
+}
+
+/* Orbe 3 — Verde bosque suave (Secundario): #526350 / #B9CCB5, Abajo al centro */
+.blob-3 {
+  width: 68vmax;
+  height: 68vmax;
+  top: 56%;
+  left: 26%;
+  background: radial-gradient(circle, var(--mesh-blob-3) 0%, rgba(82, 99, 80, 0.18) 42%, transparent 70%);
+  animation: shiftBlob3 12s ease-in-out infinite alternate;
+}
+
+/* Animación 1: Rotación global de 360° en loop infinito continuo */
+@keyframes rotateMesh {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animación 2: Oscilaciones armónicas pendulares (-80px a +80px) */
+@keyframes shiftBlob1 {
+  from {
+    transform: translate(-80px, 0);
+  }
+  to {
+    transform: translate(80px, 0);
+  }
+}
+
+@keyframes shiftBlob2 {
+  from {
+    transform: translate(80px, 0);
+  }
+  to {
+    transform: translate(-80px, 0);
+  }
+}
+
+@keyframes shiftBlob3 {
+  from {
+    transform: translate(0, -80px);
+  }
+  to {
+    transform: translate(0, 80px);
+  }
+}
+
+/* Optimización y adaptación para móviles y pantallas táctiles */
+@media (max-width: 768px) {
+  .blob {
+    filter: blur(55px);
+  }
+
+  .blob-1 {
+    width: 85vw;
+    height: 85vw;
+    top: 15%;
+    left: 8%;
+  }
+
+  .blob-2 {
+    width: 78vw;
+    height: 78vw;
+    top: 45%;
+    left: 40%;
+  }
+
+  .blob-3 {
+    width: 70vw;
+    height: 70vw;
+    top: 65%;
+    left: 18%;
+  }
+
+  @keyframes shiftBlob1 {
+    from {
+      transform: translate(-45px, 0);
+    }
+    to {
+      transform: translate(45px, 0);
+    }
+  }
+
+  @keyframes shiftBlob2 {
+    from {
+      transform: translate(45px, 0);
+    }
+    to {
+      transform: translate(-45px, 0);
+    }
+  }
+
+  @keyframes shiftBlob3 {
+    from {
+      transform: translate(0, -45px);
+    }
+    to {
+      transform: translate(0, 45px);
+    }
+  }
+}
+
 
 /* Subtle Organic Grain Texture */
 body::after {
@@ -110,9 +257,12 @@ body::after {
   .slide-arrow-btn,
   .slide-tab-btn,
   .slide-dot,
-  .accordion-content {
+  .accordion-content,
+  .mesh-rotator,
+  .blob {
     transform: none !important;
     transition: none !important;
+    animation: none !important;
   }
 }
 
