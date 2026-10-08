@@ -292,6 +292,58 @@ function initRegionalNorms() {
   const insightText = document.getElementById("norms-insight-text");
   const binsGrid = document.getElementById("bins-visual-grid");
 
+  function getWasteCategoryIcon(bin) {
+    const text = (bin.name + " " + (bin.example || "")).toLowerCase();
+    
+    // Plásticos: botella / envase de plástico
+    if (text.includes("plástic") || text.includes("pet") || text.includes("hdpe") || text.includes("vermelho")) {
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 2h-4c-.55 0-1 .45-1 1v2H7c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-2V3c0-.55-.45-1-1-1zm-3 2h2v1h-2V4zm6 16H7V7h10v13z"/></svg>`;
+    }
+    
+    // Papel y Cartón: hoja de papel / pliegos
+    if (text.includes("papel") || text.includes("cartón") || text.includes("papelão") || text.includes("azul")) {
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>`;
+    }
+    
+    // Vidrio: botella / frasco de vidrio
+    if (text.includes("vidr") || text.includes("frasco")) {
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c-.55 0-1 .45-1 1v1.18C8.61 4.7 7 6.64 7 9v11c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V9c0-2.36-1.61-4.3-4-4.82V3c0-.55-.45-1-1-1zm3 8v10H9V10c0-1.66 1.34-3 3-3s3 1.34 3 3z"/></svg>`;
+    }
+    
+    // Metales: lata de aluminio / conserva
+    if (text.includes("metal") || text.includes("lata") || text.includes("aluminio") || (text.includes("amarelo") && !text.includes("plástic"))) {
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 3c0 .55-.45 1-1 1H8c-.55 0-1-.45-1-1s.45-1 1-1h8c.55 0 1 .45 1 1zm0 13H7V8h10v11zm-5-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>`;
+    }
+    
+    // Orgánicos: hoja botánica / restos orgánicos
+    if (text.includes("orgánic") || text.includes("comida") || text.includes("compost") || text.includes("marrom") || text.includes("poda") || text.includes("vegetal") || text.includes("bolsa verde")) {
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>`;
+    }
+    
+    // Textiles: ropa / tela
+    if (text.includes("textil") || text.includes("ropa") || text.includes("tela") || text.includes("prenda")) {
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 5.4l-4.8-2.7c-.4-.2-.8-.2-1.2 0L12 4.6 8.4 2.7c-.4-.2-.8-.2-1.2 0L2.4 5.4c-.5.3-.6.9-.3 1.4l2.4 4.1c.3.5.9.6 1.4.3L7 10.5V20c0 .6.4 1 1 1h8c.6 0 1-.4 1-1v-9.5l1.1.7c.5.3 1.1.2 1.4-.3l2.4-4.1c.3-.5.2-1.1-.3-1.4z"/></svg>`;
+    }
+    
+    // Madera: huacal / tablas de madera
+    if (text.includes("mader") || text.includes("huacal") || text.includes("preto") || text.includes("tabla")) {
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 4h-5V5h5v2zm-7-2v2H5V5h6zm-6 4h14v2H5V9zm0 4h6v2H5v-2zm8 0h6v2h-6v-2zm-8 4h14v2H5v-2z"/></svg>`;
+    }
+    
+    // Cartón para bebidas / Tetra Pak
+    if (text.includes("tetra") || text.includes("bebida") || text.includes("multicapa")) {
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 3h12l2 4v14c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V7l2-4zm1 4h10l-1-2H8L7 7zm1 14h8V9H8v12z"/></svg>`;
+    }
+    
+    // Secos Reciclables / Bolsa Blanca
+    if (text.includes("seco") || text.includes("aprovechable") || text.includes("reciclable") || text.includes("blanca")) {
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`;
+    }
+    
+    // Basura común / no aprovechable / contenedor general
+    return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12z"/></svg>`;
+  }
+
   function renderCountry(countryKey) {
     const data = normsData[countryKey];
     if (!data) return;
@@ -310,9 +362,7 @@ function initRegionalNorms() {
         return `
           <div class="bin-item-card">
             <div class="bin-icon-circle" style="background-color: ${bin.color}; ${borderStyle} ${textColor}">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12z"/>
-              </svg>
+              ${getWasteCategoryIcon(bin)}
             </div>
             <span class="bin-name">${bin.name}</span>
             <span class="bin-waste-example">${bin.example}</span>
@@ -498,7 +548,7 @@ async function initDynamicReleaseInfo() {
         });
         if (ghRes.ok) {
           const ghJson = await ghRes.json();
-          const tag = ghJson.tag_name || "v18.9.0";
+          const tag = ghJson.tag_name || "v18.11.1";
           const apkAsset = Array.isArray(ghJson.assets)
             ? ghJson.assets.find(a => a.name && a.name.endsWith(".apk")) || ghJson.assets[0]
             : null;

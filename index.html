@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoScan — Clasificación Inteligente de Residuos con Edge AI sin Internet</title>
+  <title>EcoScan: Identificación de Residuos en Tiempo Real con Edge AI sin Conexión</title>
   
   <meta name="description" content="EcoScan es una aplicación Android nativa que identifica residuos en tiempo real mediante Edge AI ejecutado en el teléfono. 100% offline, privada y adaptada a 7 normas de América Latina.">
   <meta name="keywords" content="EcoScan, reciclaje, residuos, inteligencia artificial, Edge AI, YOLOv8, Android, APK, SEMARNAT, sustentabilidad, BUAP">
@@ -11,7 +11,7 @@
   
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="EcoScan — Clasificación Inteligente de Residuos, sin Internet">
+  <meta property="og:title" content="EcoScan: Separación de Residuos en el Teléfono, sin Internet">
   <meta property="og:description" content="Identifica en tiempo real el material de cualquier residuo mediante visión artificial en tu teléfono. Sin enviar imágenes a servidores y adaptada a 7 normas de Latinoamérica.">
   <meta property="og:image" content="/assets/screenshots/app-scan-textiles.png">
 
@@ -43,12 +43,12 @@
        ======================================================================== -->
   <header class="site-header">
     <nav class="nav-bar" aria-label="Navegación principal">
-      <a href="#" class="brand-link" id="brand-logo" aria-label="Ir al inicio de EcoScan">
+      <a href="#hero" class="brand-link" id="brand-logo" aria-label="Ir al inicio de EcoScan">
         <div class="brand-icon">
           <img src="/assets/icons/ecoscan-logo.png" alt="EcoScan Logo" class="brand-logo-img">
         </div>
         <span class="brand-name">EcoScan</span>
-        <span class="brand-badge" data-release-version>v18.9.0</span>
+        <span class="brand-badge" data-release-version>v18.11.1</span>
       </a>
 
       <ul class="nav-menu" id="nav-menu">
@@ -57,17 +57,17 @@
         <li><a href="#normas-latam" class="nav-link" id="nav-link-normas">7 Normas Latam</a></li>
         <li><a href="#instalacion" class="nav-link" id="nav-link-instalacion">Guía APK</a></li>
         <li class="nav-menu-mobile-cta">
-          <a href="/downloads/latest.apk" download="EcoScan_v18.9.0.apk" class="btn-mobile-nav-download trigger-download">
+          <a href="/downloads/latest.apk" download="EcoScan_v18.11.1.apk" class="btn-mobile-nav-download trigger-download">
             <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
               <path d="M5 20h14v-2H5v2zM12 2L6.5 11h3.5v5h4v-5h3.5L12 2z"/>
             </svg>
-            <span>Descargar EcoScan APK (<span data-release-version>v18.9.0</span>)</span>
+            <span>Descargar EcoScan APK (<span data-release-version>v18.11.1</span>)</span>
           </a>
         </li>
       </ul>
 
       <div class="nav-actions">
-        <a href="/downloads/latest.apk" download="EcoScan_v18.9.0.apk" class="btn-cta-nav trigger-download" id="btn-nav-download">
+        <a href="/downloads/latest.apk" download="EcoScan_v18.11.1.apk" class="btn-cta-nav trigger-download" id="btn-nav-download">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M5 20h14v-2H5v2zM12 2L6.5 11h3.5v5h4v-5h3.5L12 2z"/>
           </svg>
@@ -98,12 +98,12 @@
           </h1>
 
           <p class="hero-subtitle">
-            <strong class="hero-subtitle-lead">Clasificación inteligente de residuos, sin Internet.</strong> Apunta la cámara a cualquier residuo y descubre al instante a qué contenedor oficial pertenece. Inferencia de inteligencia artificial ejecutada íntegramente en tu teléfono, con privacidad total y adaptada a las normas oficiales de América Latina.
+            <strong class="hero-subtitle-lead">Separación de residuos en tiempo real, directo en tu teléfono.</strong> Apunta la cámara a cualquier residuo y descubre al instante el contenedor oficial que le corresponde. Visión computacional ejecutada 100% en tu dispositivo, con privacidad total y adaptada a 7 normas oficiales de América Latina.
           </p>
 
           <div class="hero-actions">
             <div class="hero-buttons-row">
-              <a href="/downloads/latest.apk" download="EcoScan_v18.9.0.apk" class="btn-primary-download trigger-download" id="hero-cta-download">
+              <a href="/downloads/latest.apk" download="EcoScan_v18.11.1.apk" class="btn-primary-download trigger-download" id="hero-cta-download">
                 <div class="btn-icon-wrapper">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
@@ -111,7 +111,7 @@
                 </div>
                 <div class="btn-text-content">
                   <span class="btn-headline">Descargar EcoScan APK</span>
-                  <span class="btn-meta"><span data-release-version>v18.9.0</span> · <span data-release-size>91.4 MB</span> · Android 8.0+</span>
+                  <span class="btn-meta"><span data-release-version>v18.11.1</span> · <span data-release-size>91.4 MB</span> · Android 8.0+</span>
                 </div>
               </a>
 
@@ -212,58 +212,87 @@
     </section>
 
     <!-- ========================================================================
-         Section: Cómo funciona (3 Steps)
+         Section: Flujo de Inferencia en Tiempo Real (Pipeline On-Device)
          ======================================================================== -->
     <section class="section" id="como-funciona">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Cómo funciona EcoScan</h2>
+          <div class="section-eyebrow-tag">Pipeline Edge AI</div>
+          <h2 class="section-title">Flujo de inferencia en tiempo real</h2>
           <p class="section-description">
-            Tres pasos inmediatos para eliminar la incertidumbre frente al contenedor de basura sin gastar datos móviles ni esperar respuestas remotas.
+            Desde el encuadre óptico hasta la indicación del contenedor oficial transcurren menos de 150 milisegundos, procesados íntegramente en los núcleos del teléfono sin requerir conexión a internet.
           </p>
         </div>
 
-        <div class="steps-grid">
+        <div class="pipeline-track">
           
-          <div class="step-card">
-            <div class="step-number-badge">1</div>
-            <h3 class="step-title">Apuntar y Encuadrar</h3>
-            <p class="step-text">
-              Abre la aplicación y orienta la cámara hacia el residuo. La interfaz analiza el flujo de video en vivo mediante CameraX de forma continua, sin necesidad de capturar fotos ni pulsar botones.
-            </p>
-            <div class="step-micro-preview">
-              <svg viewBox="0 0 24 24">
-                <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
-              </svg>
-              <span>Detección continua sin pulsar obturador</span>
+          <!-- Etapa 1 -->
+          <div class="pipeline-node">
+            <div class="pipeline-node-header">
+              <span class="pipeline-phase-badge">Etapa 01</span>
+              <span class="pipeline-tech-tag">CameraX · 30 FPS</span>
+            </div>
+            <div class="pipeline-node-body">
+              <h3 class="pipeline-node-title">Captura Óptica Continua</h3>
+              <p class="pipeline-node-text">
+                El sensor de la cámara analiza el encuadre en memoria viva sin congelar la pantalla. Detección continua sin pulsar obturador ni almacenar imágenes en el dispositivo.
+              </p>
+            </div>
+            <div class="pipeline-node-footer">
+              <div class="pipeline-metric-chip">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+                <span>Flujo directo en RAM a 30 FPS</span>
+              </div>
             </div>
           </div>
 
-          <div class="step-card">
-            <div class="step-number-badge">2</div>
-            <h3 class="step-title">Inferencia Edge AI</h3>
-            <p class="step-text">
-              El intérprete de TensorFlow Lite ejecuta el modelo YOLOv8 sobre los núcleos de tu procesador (CPU multihilo). El cálculo es 100% local, descartando lecturas dudosas con umbrales calibrados científicamente.
-            </p>
-            <div class="step-micro-preview">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-              </svg>
-              <span>4 hilos de CPU · 0 kb enviados a la red</span>
+          <div class="pipeline-connector" aria-hidden="true">
+            <div class="pipeline-connector-line"></div>
+            <div class="pipeline-pulse-dot"></div>
+          </div>
+
+          <!-- Etapa 2 -->
+          <div class="pipeline-node active-node">
+            <div class="pipeline-node-header">
+              <span class="pipeline-phase-badge">Etapa 02</span>
+              <span class="pipeline-tech-tag">LiteRT · GPU & CPU</span>
+            </div>
+            <div class="pipeline-node-body">
+              <h3 class="pipeline-node-title">Inferencia Neural Acelerada</h3>
+              <p class="pipeline-node-text">
+                TensorFlow Lite ejecuta YOLOv8 mediante aceleración por hardware en GPU (GpuDelegate), con alternancia automática y transparente a CPU multihilo (4 hilos) si el hardware lo requiere.
+              </p>
+            </div>
+            <div class="pipeline-node-footer">
+              <div class="pipeline-metric-chip">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                <span>Aceleración GPU activa · Fallback a 4 hilos CPU</span>
+              </div>
             </div>
           </div>
 
-          <div class="step-card">
-            <div class="step-number-badge">3</div>
-            <h3 class="step-title">Resolución Inmediata</h3>
-            <p class="step-text">
-              Aparece en pantalla una tarjeta que indica la fracción general (orgánico/inorgánico), el contenedor normativo exacto de tu país y un consejo práctico de preparación.
-            </p>
-            <div class="step-micro-preview">
-              <svg viewBox="0 0 24 24">
-                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/>
-              </svg>
-              <span>Instrucción accionable y código de color</span>
+          <div class="pipeline-connector" aria-hidden="true">
+            <div class="pipeline-connector-line"></div>
+            <div class="pipeline-pulse-dot"></div>
+          </div>
+
+          <!-- Etapa 3 -->
+          <div class="pipeline-node">
+            <div class="pipeline-node-header">
+              <span class="pipeline-phase-badge">Etapa 03</span>
+              <span class="pipeline-tech-tag">Mapeo Dinámico</span>
+            </div>
+            <div class="pipeline-node-body">
+              <h3 class="pipeline-node-title">Resolución y Código Oficial</h3>
+              <p class="pipeline-node-text">
+                El sistema traduce en milisegundos la clase identificada al código de color y contenedor oficial del país activo, mostrando una recomendación práctica de preparación.
+              </p>
+            </div>
+            <div class="pipeline-node-footer">
+              <div class="pipeline-metric-chip">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+                <span>Contenedor exacto + consejo de uso</span>
+              </div>
             </div>
           </div>
 
@@ -291,11 +320,11 @@
               <svg class="pillar-card-icon-inline" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
                 <path d="M6 2v2H4c-.55 0-1 .45-1 1v2H1v2h2v2H1v2h2v2H1v2h2v2c0 .55.45 1 1 1h2v2h2v-2h2v2h2v-2h2v2h2v-2h2c.55 0 1-.45 1-1v-2h2v-2h-2v-2h2v-2h-2V9h2V7h-2V5c0-.55-.45-1-1-1h-2V2h-2v2h-2V2h-2v2H8V2H6zm2 4h8v8H8V6z"/>
               </svg>
-              <span>Inteligencia Artificial en el teléfono (Edge AI)</span>
+              <span>Visión computacional local en el procesador (Edge AI)</span>
             </h3>
             
             <p class="pillar-card-description">
-              El reconocimiento de materiales no viaja a ningún servidor en la nube. Todo el cálculo de detección (YOLOv8 con selección inteligente entre variante nano y small) ocurre dentro del procesador del dispositivo, logrando respuesta inmediata sin consumir datos móviles.
+              El reconocimiento de materiales no viaja a ningún servidor en la nube. Todo el cálculo de detección (YOLOv8 con selección dinámica entre variante nano y small) ocurre dentro del procesador del dispositivo, logrando respuesta inmediata sin consumir datos móviles.
             </p>
 
             <ul class="pillar-feature-list">
@@ -313,8 +342,8 @@
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                 </div>
                 <div class="pillar-feature-text">
-                  <strong>Ejecución en 4 hilos de CPU con LiteRT float32</strong>
-                  <span>Optimizado para procesadores móviles sin agotar la batería del teléfono.</span>
+                  <strong>Aceleración por GPU con fallback automático a CPU</strong>
+                  <span>Inferencia acelerada con GpuDelegate en dispositivos compatibles y alternancia transparente a 4 hilos de CPU en gamas de entrada.</span>
                 </div>
               </li>
             </ul>
@@ -343,7 +372,7 @@
                   </div>
                   <div class="flow-info">
                     <span class="flow-title">LiteRT / TensorFlow Lite</span>
-                    <span class="flow-sub">YOLOv8 en CPU multihilo</span>
+                    <span class="flow-sub">GPU Delegate / CPU 4 hilos</span>
                   </div>
                 </div>
                 <div class="flow-connector">
@@ -472,7 +501,7 @@
                   </div>
                   <div class="perf-metric-text">
                     <span class="perf-metric-title">Latencia de Inferencia</span>
-                    <span class="perf-metric-val">~85 ms en CPU móvil</span>
+                    <span class="perf-metric-val">&lt; 85 ms (GPU / CPU multihilo)</span>
                   </div>
                 </div>
                 <div class="perf-metric-row">
@@ -600,7 +629,7 @@
               <div class="accordion-content">
                 <div class="accordion-inner">
                   <div class="accordion-body">
-                    Toca el botón "Descargar APK" en esta página. Se descargará el archivo oficial <code>EcoScan_v18.9.0.apk</code> (91.4 MB).
+                    Toca el botón "Descargar APK" en esta página. Se descargará el archivo oficial <code>EcoScan_v18.11.1.apk</code> (91.4 MB).
                   </div>
                 </div>
               </div>
@@ -699,8 +728,8 @@
             </div>
 
             <div class="direct-card-action">
-              <a href="/downloads/latest.apk" download="EcoScan_v18.9.0.apk" class="btn-primary-download trigger-download" style="width: 100%; justify-content: center;">
-                <span>Descargar EcoScan v18.9.0 (91.4 MB)</span>
+              <a href="/downloads/latest.apk" download="EcoScan_v18.11.1.apk" class="btn-primary-download trigger-download" style="width: 100%; justify-content: center;">
+                <span>Descargar EcoScan v18.11.1 (91.4 MB)</span>
               </a>
             </div>
 
@@ -711,12 +740,12 @@
                   <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
                   Firma SHA-256 Verificada
                 </span>
-                <a href="https://github.com/samd27/EcoScan-Releases/releases/tag/v18.9.0" target="_blank" rel="noopener noreferrer" class="crypto-source-link">
+                <a href="https://github.com/samd27/EcoScan-Releases/releases/tag/v18.11.1" target="_blank" rel="noopener noreferrer" class="crypto-source-link">
                   Ver release en GitHub &rarr;
                 </a>
               </div>
               <div class="crypto-hash-row">
-                <code class="crypto-hash-code" id="hash-code-text">81808411aa52e662152f685ad11e83e9af12dc56a8dbfc754661e6c53bdbd075</code>
+                <code class="crypto-hash-code" id="hash-code-text">0114f2e61b925984c3b4fa6dd385995ec00f9c77f81fa1207416fe908c1fe3ec</code>
                 <button class="btn-copy-hash" id="btn-copy-hash" aria-label="Copiar hash SHA-256">
                   <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                   <span class="btn-copy-text">Copiar</span>
@@ -742,7 +771,7 @@
               Descarga EcoScan en tu teléfono Android y transforma la duda en una decisión consciente e informada en menos de dos segundos.
             </p>
             <div class="banner-chips">
-              <span class="banner-chip-item">Versión <span data-release-version-number>18.9.0</span></span>
+              <span class="banner-chip-item">Versión <span data-release-version-number>18.11.1</span></span>
               <span class="banner-chip-item">Tamaño: <span data-release-size>91.4 MB</span></span>
               <span class="banner-chip-item">Android 8.0+</span>
               <span class="banner-chip-item">100% Gratis</span>
@@ -750,7 +779,7 @@
           </div>
 
           <div class="banner-action">
-            <a href="/downloads/latest.apk" download="EcoScan_v18.9.0.apk" class="btn-primary-download trigger-download" id="banner-btn-download">
+            <a href="/downloads/latest.apk" download="EcoScan_v18.11.1.apk" class="btn-primary-download trigger-download" id="banner-btn-download">
               <div class="btn-icon-wrapper">
                 <svg viewBox="0 0 24 24">
                   <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
@@ -758,7 +787,7 @@
               </div>
               <div class="btn-text-content">
                 <span class="btn-headline">Descargar EcoScan</span>
-                <span class="btn-meta">Archivo .apk verificado (<span data-release-version>v18.9.0</span>)</span>
+                <span class="btn-meta">Archivo .apk verificado (<span data-release-version>v18.11.1</span>)</span>
               </div>
             </a>
           </div>
@@ -775,7 +804,7 @@
       <div class="footer-grid">
         
         <div class="footer-brand">
-          <a href="#" class="brand-link">
+          <a href="#hero" class="brand-link" aria-label="Ir al inicio de EcoScan">
             <div class="brand-icon">
               <img src="/assets/icons/ecoscan-logo.png" alt="EcoScan Logo" class="brand-logo-img">
             </div>
@@ -783,7 +812,7 @@
           </a>
           <p>
             "La posibilidad de mejorar el mundo al alcance de tu mano".
-            Clasificación inteligente de residuos con visión artificial y Edge AI para América Latina.
+            Separación y clasificación de residuos con visión computacional local y Edge AI para América Latina.
           </p>
         </div>
 
@@ -802,8 +831,8 @@
           <h3 class="footer-heading">Ficha Técnica</h3>
           <div class="footer-specs">
             <p>Paquete: <code>com.teamecoscan.ecoscanrebirth</code></p>
-            <p>Versión: <code><span data-release-version>v18.9.0</span></code></p>
-            <p>Motor: <code>TensorFlow Lite (LiteRT float32)</code></p>
+            <p>Versión: <code><span data-release-version>v18.11.1</span></code></p>
+            <p>Motor: <code>TensorFlow Lite (LiteRT GPU Delegate + CPU)</code></p>
             <p>Modelo: <code>YOLOv8 (variantes n y s)</code></p>
             <p>Compatibilidad: <code>Android 8.0+</code></p>
           </div>
@@ -846,7 +875,7 @@
     </div>
     <div class="toast-text">
       <span class="toast-title">Descarga iniciada</span>
-      <span class="toast-desc" id="toast-desc-text">EcoScan_<span data-release-version>v18.9.0</span>.apk (<span data-release-size>91.4 MB</span>). Sigue la guía de instalación si es necesario.</span>
+      <span class="toast-desc" id="toast-desc-text">EcoScan_<span data-release-version>v18.11.1</span>.apk (<span data-release-size>91.4 MB</span>). Sigue la guía de instalación si es necesario.</span>
     </div>
   </div>
 

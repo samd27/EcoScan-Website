@@ -94,13 +94,5 @@
   --duration-slow: 400ms;
 }
 
-/* Optional Dark Mode Adaptive Palette */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --mesh-bg: #10140F;
-    --mesh-blob-1: rgba(76, 175, 80, 0.35);
-    --mesh-blob-2: rgba(160, 207, 213, 0.40);
-    --mesh-blob-3: rgba(185, 204, 181, 0.38);
-  }
-}
+/* Paleta institucional Menta / Bosque garantizada de forma homogénea según DESIGN.md */
 

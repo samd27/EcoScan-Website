@@ -48,11 +48,11 @@ async function getLatestRelease() {
   }
 
   return {
-    version: 'v18.8.0',
-    versionNumber: '18.8.0',
-    filename: 'EcoScan_v18.8.0.apk',
-    size: '91.3 MB',
-    downloadUrl: 'https://github.com/samd27/EcoScan-Releases/releases/download/v18.8.0/EcoScan_v18.8.0.apk',
+    version: 'v18.11.1',
+    versionNumber: '18.11.1',
+    filename: 'EcoScan_v18.11.1.apk',
+    size: '91.4 MB',
+    downloadUrl: 'https://github.com/samd27/EcoScan-Releases/releases/download/v18.11.1/EcoScan_v18.11.1.apk',
   };
 }
 
